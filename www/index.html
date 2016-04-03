@@ -43,7 +43,9 @@
                     <li><a href="#MyPokemanPage">My Pokeman</a></li>
                 </ul>
                 <img data-role="button" id="CatchButton" src="img/catchButtonGrey.png" style="margin:100px; width: 300px; height: 300px">
+                <p style="margin: 0 150px">Lat</p>
                 <p id="latSpan" style="margin: 0 150px"/>
+                <p style="margin: 0 150px">lng</p>
                 <p id="lngSpan" style="margin: 0 150px"/>
             </div>
         </div>
@@ -68,6 +70,29 @@
                 <img id="DetailPokemonImg" width="100%" src="img/imgBack.png">
             </div>
         </div>
+        
+        <div data-role="page" id="MyPokemanPage">
+            <div data-role="header">
+                <h1>Pokeman!</h1>
+            </div>
+            <div role="main">
+                <ul id="MyPokeList" data-role="listview">
+                    
+                </ul>
+            </div>                
+        </div>
+        
+        <div data-role="page" id="catchPokePage">
+            <div data-role="header">
+                <h1>Pokeman!</h1>
+            </div>    
+            <div role="main">
+                <h1>You caught</h1>
+                <h2 id="caughtPokeName"></h2>
+                <img id="caughtPokeImg" width="100%" src="img/imgBack.png">
+            </div>
+        </div>
+        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/PokeCatch.js"></script>

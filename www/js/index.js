@@ -125,6 +125,36 @@ var setDetailPage = function(pokemon){
     $("#DetailPokemonImg").attr("src", pokemon.sprites.front_default);
 }
 
+var getMyPokeman = function(){
+    var myPokeman = JSON.parse(window.localStorage.getItem(caughtKey));
+    if(myPokeman != undefined){
+       myPokeman.forEach(function(element) {
+            pokemonIdLink = element.url;
+            thumbName = "PokemonThumb" + element.name;
+            
+            var html = [];
+            html.push(
+                "<li>",
+                "<a id='" + pokemonIdLink +"'>",
+                "<img src='img/imgBack.png' id='"+ thumbName +"'>",
+                "<h2>",
+                element.name,
+                "</h2>",
+                "<h2 class='ui-li-count'>",
+                element.amount,
+                "</h2>",
+                "</a>",
+                "</li>"
+            );
+            $("#MyPokeList").append(html.join(""));
+            
+            getPokemonSprite(api + "pokemon/" + element.id + "/", thumbName);
+       }, this);
+    }
+     $("#MyPokeList .RunningLoader").remove();
+     $("#MyPokeList").listview("refresh");
+}
+
 $(document).on("scrollstop", function (e) {
     var activePage = $.mobile.pageContainer.pagecontainer("getActivePage"),
         screenHeight = $.mobile.getScreenHeight(),
@@ -145,4 +175,11 @@ $("#pokemanListPage").on('pageinit', function(){
      $("#PokeList").append(runningLoader);
      $("#PokeList").listview("refresh");
     var testpokeman = getMorePokeman();
+});
+
+$("#MyPokemanPage").on('pagebeforeshow', function(){
+    $("#MyPokeList").html("");
+    $("#MyPokeList").append(runningLoader);
+    $("#MyPokeList").listview("refresh");
+    getMyPokeman();
 });
