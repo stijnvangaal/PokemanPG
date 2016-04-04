@@ -88,6 +88,7 @@ var checkForPokemonCatch = function(position){
 }
 
 var clearCatchPage = function(){
+    $("#CatchAction").html("Threw pokeball");
     $("#caughtPokeName").html("");
     $("#caughtPokeImg").attr("src", "img/pokeball-waiting.gif");
 }
@@ -119,29 +120,30 @@ var saveCaughtPokemon = function(pokemon){
 var setCatchValues = function(pokemon){
     $("#caughtPokeImg").attr("src", "img/pokeball-done.gif");
     setTimeout(function() {
+        $("#CatchAction").html("You Caught: ");
         $("#caughtPokeName").html(pokemon.name);
         $("#caughtPokeImg").attr("src", pokemon.sprites.front_default);
         saveCaughtPokemon(pokemon);
         
+        livePokemon.splice(livePokemon.indexOf(pokemon), 1);
+        startGenerateLivePokemon();
     }, 1000);
 }
 
 var catchPokemon = function(pokemon){
     clearCatchPage();
     $.mobile.changePage("#catchPokePage");
-    
+    $("#CatchAction").html("Threw pokeball at id " + pokemon.id);
     $.get(api + "pokemon/" + pokemon.id +  "/", function(data, success){
+        $("#CatchAction").html("Identified pokemon " + data.name);
         var pokemon
         var pokeImage = new Image();
         pokeImage.onload = function(image){
+            $("#CatchAction").html("Pokemon caught");
             setCatchValues(data);
         }
         pokeImage.src = data.sprites.front_default;
-    });    
-    
-    livePokemon.splice(livePokemon.indexOf(pokemon), 1);
-    
-    startGenerateLivePokemon();
+    });
 }
 
 $("#CatchButton").click(function(){
