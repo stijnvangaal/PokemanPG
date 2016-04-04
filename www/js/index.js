@@ -53,6 +53,7 @@ var app = {
 var api = "http://pokeapi.co/api/v2/";
 var caughtKey = "MyCaughtPokemon";
 var livePokemonKey = "AllLivePokemon";
+var generationDateKey = "LastGeneratedPokemon";
 var pokemonListLimit = 20;
 var totalPokeCount = 0;
 var currentPokeCount = 0;

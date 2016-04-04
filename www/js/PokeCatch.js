@@ -1,4 +1,5 @@
 var livePokemon = JSON.parse(window.localStorage.getItem(livePokemonKey));
+var generateDate = window.localStorage.getItem(generationDateKey);
 var livePokemonAmount = 10;
 var pokemonGenerateLng = 5.293565;
 var PokemonGenerateLat = 51.690155;
@@ -15,6 +16,9 @@ var startGenerateLivePokemon = function(){
     if(livePokemon == undefined){
         livePokemon = [];
         generateLivePokemon(livePokemonAmount);
+    }
+    else if( generateDate == undefined || generateDate != new Date().toLocaleString()){ 
+         generateLivePokemon(livePokemonAmount);
     }
     else if(livePokemon.length < livePokemonAmount){
         generateLivePokemon(livePokemonAmount - livePokemon.length);
@@ -40,6 +44,7 @@ var generateLivePokemon = function(amount){
     livePokemon.push(pokemon);
     
     window.localStorage.setItem(livePokemonKey, JSON.stringify(livePokemon));
+    window.localStorage.setItem(generationDateKey, new Date().toLocaleString());
 }
 
 var generateLocation = function(){
