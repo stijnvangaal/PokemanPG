@@ -20,25 +20,25 @@
 
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function(){
         this.bindEvents();
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
+    bindEvents: function(){
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
+    onDeviceReady: function(){
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function(id){
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -63,25 +63,25 @@ var isLoading = false;
 
 var getMorePokeman = function(){
     isLoading = true;
-    
-    if(nextPokemanUri == ""){
-       nextPokemanUri = api + "pokemon/?limit="+ pokemonListLimit;
+
+    if (nextPokemanUri == ""){
+        nextPokemanUri = api + "pokemon/?limit=" + pokemonListLimit;
     }
-    
+
     $.get(nextPokemanUri, function(data, success){
         nextPokemanUri = data.next;
         totalPokeCount = data.count;
         currentPokeCount += data.results.length;
-        
-        data.results.forEach(function(element) {
+
+        data.results.forEach(function(element){
             pokemonIdLink = element.url;
             thumbName = "PokemonThumb" + element.name;
-            
+
             var html = [];
             html.push(
                 "<li>",
-                "<a id='" + pokemonIdLink +"'>",
-                "<img src='img/imgBack.png' id='"+ thumbName +"'>",
+                "<a id='" + pokemonIdLink + "'>",
+                "<img src='img/imgBack.png' id='" + thumbName + "'>",
                 "<h2>",
                 element.name,
                 "</h2>",
@@ -89,12 +89,12 @@ var getMorePokeman = function(){
                 "</li>"
             );
             $("#PokeList").append(html.join(""));
-            
+
         }, this);
-        
+
         isLoading = false;
         $(".RunningLoader").remove();
-        if(currentPokeCount < totalPokeCount){
+        if (currentPokeCount < totalPokeCount){
             $("#PokeList").append(runningLoader);
         }
         $("#PokeList").listview("refresh");
@@ -103,13 +103,13 @@ var getMorePokeman = function(){
 
 var getPokemonSprite = function(pokemanUrl, imgElement){
     $.get(pokemanUrl, function(data, success){
-       $("#"+imgElement).attr("src", data.sprites.front_default); 
+        $("#" + imgElement).attr("src", data.sprites.front_default);
     });
 }
 
 $("#PokeList").on('click', 'a', function(e){
     e.preventDefault();
-    var url=$(this).attr('id');
+    var url = $(this).attr('id');
     clearDetailPage();
     $.get(url, setDetailPage);
     $.mobile.changePage("#pokemanDetail");
@@ -127,16 +127,16 @@ var setDetailPage = function(pokemon){
 
 var getMyPokeman = function(){
     var myPokeman = JSON.parse(window.localStorage.getItem(caughtKey));
-    if(myPokeman != undefined){
-       myPokeman.forEach(function(element) {
+    if (myPokeman != undefined){
+        myPokeman.forEach(function(element){
             pokemonIdLink = element.url;
             thumbName = "PokemonThumb" + element.name;
-            
+
             var html = [];
             html.push(
                 "<li>",
-                "<a id='" + pokemonIdLink +"'>",
-                "<img src='img/imgBack.png' id='"+ thumbName +"'>",
+                "<a id='" + pokemonIdLink + "'>",
+                "<img src='img/imgBack.png' id='" + thumbName + "'>",
                 "<h2>",
                 element.name,
                 "</h2>",
@@ -147,15 +147,15 @@ var getMyPokeman = function(){
                 "</li>"
             );
             $("#MyPokeList").append(html.join(""));
-            
+
             getPokemonSprite(api + "pokemon/" + element.id + "/", thumbName);
-       }, this);
+        }, this);
     }
-     $("#MyPokeList .RunningLoader").remove();
-     $("#MyPokeList").listview("refresh");
+    $("#MyPokeList .RunningLoader").remove();
+    $("#MyPokeList").listview("refresh");
 }
 
-$(document).on("scrollstop", function (e) {
+$(document).on("scrollstop", function(e){
     var activePage = $.mobile.pageContainer.pagecontainer("getActivePage"),
         screenHeight = $.mobile.getScreenHeight(),
         contentHeight = $(".ui-content", activePage).outerHeight(),
@@ -165,15 +165,15 @@ $(document).on("scrollstop", function (e) {
         scrollEnd = contentHeight - screenHeight + header + footer;
     $(".ui-btn-left", activePage).text("Scrolled: " + scrolled);
     $(".ui-btn-right", activePage).text("ScrollEnd: " + scrollEnd);
-    if (activePage[0].id == "pokemanListPage" && scrolled >= scrollEnd && !isLoading) {
+    if (activePage[0].id == "pokemanListPage" && scrolled >= scrollEnd && !isLoading){
         console.log("adding...");
         getMorePokeman();
     }
 });
 
 $("#pokemanListPage").on('pageinit', function(){
-     $("#PokeList").append(runningLoader);
-     $("#PokeList").listview("refresh");
+    $("#PokeList").append(runningLoader);
+    $("#PokeList").listview("refresh");
     var testpokeman = getMorePokeman();
 });
 
