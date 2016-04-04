@@ -82,7 +82,6 @@ var getMorePokeman = function(){
             html.push(
                 "<li>",
                 "<a id='" + pokemonIdLink + "'>",
-                "<img src='img/imgBack.png' id='" + thumbName + "'>",
                 "<h2>",
                 element.name,
                 "</h2>",
@@ -116,12 +115,21 @@ $("#PokeList").on('click', 'a', function(e){
     $.mobile.changePage("#pokemanDetail");
 });
 
+$("#MyPokeList").on('click', 'a', function(e){
+    e.preventDefault();
+    var url = $(this).attr('id');
+    clearDetailPage();
+    $.get(url, setDetailPage);
+    $.mobile.changePage("#pokemanDetail");
+});
+
 var clearDetailPage = function(){
     $("#DetailPokemonName").html("");
     $("#DetailPokemonImg").attr("src", "img/spinner.gif");
+    $("#AmountPokemon").html("");
 }
 
-var setDetailPage = function(pokemon){
+var setDetailPage = function(pokemon, amount){
     $("#DetailPokemonName").html(pokemon.name);
     $("#DetailPokemonImg").attr("src", pokemon.sprites.front_default);
 }
@@ -137,7 +145,6 @@ var getMyPokeman = function(){
             html.push(
                 "<li>",
                 "<a id='" + pokemonIdLink + "'>",
-                "<img src='img/imgBack.png' id='" + thumbName + "'>",
                 "<h2>",
                 element.name,
                 "</h2>",
@@ -148,8 +155,6 @@ var getMyPokeman = function(){
                 "</li>"
             );
             $("#MyPokeList").append(html.join(""));
-
-            getPokemonSprite(api + "pokemon/" + element.id + "/", thumbName);
         }, this);
     }
     $("#MyPokeList .RunningLoader").remove();

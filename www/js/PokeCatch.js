@@ -138,9 +138,8 @@ var setCatchValues = function(pokemon){
 var catchPokemon = function(pokemon){
     clearCatchPage();
     $.mobile.changePage("#catchPokePage");
-    $("#CatchAction").html("Threw pokeball at id " + pokemon.id);
+    $("#CatchAction").html("Threw pokeball");
     $.get(api + "pokemon/" + pokemon.id +  "/", function(data, success){
-        $("#CatchAction").html("Identified pokemon " + data.name);
         var pokemon
         var pokeImage = new Image();
         pokeImage.onload = function(image){
@@ -159,8 +158,6 @@ $("#CatchButton").click(function(){
         }
     }
 });
-
-
 startGenerateLivePokemon();
 
 navigator.geolocation.watchPosition(checkForPokemonCatch);
