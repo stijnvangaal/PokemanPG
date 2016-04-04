@@ -138,7 +138,7 @@ var getMyPokeman = function(){
     var myPokeman = JSON.parse(window.localStorage.getItem(caughtKey));
     if (myPokeman != undefined){
         myPokeman.forEach(function(element){
-            pokemonIdLink = element.url;
+            pokemonIdLink = api + "pokemon/" + element.id + "/";
             thumbName = "PokemonThumb" + element.name;
 
             var html = [];
@@ -157,7 +157,7 @@ var getMyPokeman = function(){
             $("#MyPokeList").append(html.join(""));
         }, this);
     }
-    $("#MyPokeList .RunningLoader").remove();
+    //$("#MyPokeList .RunningLoader").remove();
     $("#MyPokeList").listview("refresh");
 }
 
@@ -185,7 +185,7 @@ $("#pokemanListPage").on('pageinit', function(){
 
 $("#MyPokemanPage").on('pagebeforeshow', function(){
     $("#MyPokeList").html("");
-    $("#MyPokeList").append(runningLoader);
+    //$("#MyPokeList").append(runningLoader);
     $("#MyPokeList").listview("refresh");
     getMyPokeman();
 });
