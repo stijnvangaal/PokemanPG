@@ -18,6 +18,7 @@ var imageCaptured = function(imageUrl){
     $("#CreateAction").html("Hey! What's this? A new Pokemon!");
     $("#CreatedPokeName").html("");
     $("#CreatedPokeImg").attr("src", "img/pokeball-waiting.gif");
+     $.mobile.changePage("#OwnPokemonPage");
     setTimeout(function() {
         $("#CreateAction").html("Yes we caught it. What would it be?");
         $("#CreatedPokeImg").attr("src", "img/pokeball-done.gif");
