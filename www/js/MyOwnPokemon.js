@@ -14,7 +14,7 @@ var getName = function(){
     return names[Math.floor(Math.random() * names.length)];
 }
 
-var imageCaptured = function(imageUrl){
+var imageCaptured = function(ImageData){
     $("#CreateAction").html("Hey! What's this? A new Pokemon!");
     $("#CreatedPokeName").html("");
     $("#CreatedPokeImg").attr("src", "img/pokeball-waiting.gif");
