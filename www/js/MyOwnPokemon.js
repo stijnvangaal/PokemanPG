@@ -7,7 +7,7 @@ var names = [
     "fjaggot",
     "fjaggiemon",
     "tyrannosaurus fjag",
-    "pickfjag"
+    "pickufjag"
 ]
 
 var getName = function(){

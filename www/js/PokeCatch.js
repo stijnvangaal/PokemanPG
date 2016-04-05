@@ -1,23 +1,21 @@
 var livePokemon = JSON.parse(window.localStorage.getItem(livePokemonKey));
 var generateDate = window.localStorage.getItem(generationDateKey);
 var livePokemonAmount = 10;
-var pokemonGenerateLng = 5.2865831;
-var PokemonGenerateLat = 51.6879925;
+var pokemonGenerateLng = 5.2866612;
+var PokemonGenerateLat = 51.6879865;
 var PokemonGenerateRad = 1000;
 var pokeAmount = 721;
-var catchRaduis = 10/111300; //10 meters
+var catchRaduis = 100/111300;
 
 var myLat = 0;
 var myLng = 0;
-
-
 
 var startGenerateLivePokemon = function(){
     if(livePokemon == undefined){
         livePokemon = [];
         generateLivePokemon(livePokemonAmount);
     }
-    else if( generateDate == undefined || generateDate != new Date().toLocaleString()){ 
+    else if( generateDate == undefined || generateDate != getToday){ 
          generateLivePokemon(livePokemonAmount);
     }
     else if(livePokemon.length < livePokemonAmount){
@@ -44,7 +42,7 @@ var generateLivePokemon = function(amount){
     livePokemon.push(pokemon);
     
     window.localStorage.setItem(livePokemonKey, JSON.stringify(livePokemon));
-    window.localStorage.setItem(generationDateKey, new Date().toLocaleString());
+    window.localStorage.setItem(generationDateKey, getToday());
 }
 
 var generateLocation = function(){
@@ -148,6 +146,14 @@ var catchPokemon = function(pokemon){
         }
         pokeImage.src = data.sprites.front_default;
     });
+}
+
+var getToday = function(){
+    var today = new Date();
+    var date  = today.getDate() + "-";
+    date    += today.getMonth() + "-";
+    date    += today.getFullYear();
+    return date;
 }
 
 $("#CatchButton").click(function(){
