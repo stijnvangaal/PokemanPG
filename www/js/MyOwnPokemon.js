@@ -11,12 +11,12 @@ var imageCaptured = function(imageData){
         "<li>",
         "<a id='OwnPokemon'>",
         "<h2>",
-        "OwnPokemon",
+        "Own Pokemon",
         "</h2>",
         "</a>",
         "</li>"
     );
-    $("#PokeList").prepend(html.join());
+    $("#PokeList").prepend(html.join(""));
 }
 
 var cameraError = function(err){
