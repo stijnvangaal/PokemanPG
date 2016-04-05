@@ -6,6 +6,7 @@ var captureImage = function(){
 var imageCaptured = function(imageUrl){
     window.localStorage.setItem(ownPokemonKey, imageUrl);
     $("#capturePokemonButton").html(imageUrl);
+    $("#capturePokemonImg").src = imageUrl;
 }
 
 var cameraError = function(err){
