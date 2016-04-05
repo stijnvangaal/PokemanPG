@@ -116,7 +116,7 @@ $("#PokeList").on('click', 'a', function(e){
         $.get(url, setDetailPage);
     }
     else{
-        $("#DetailPokemonName").html(ownImageData);
+        $("#DetailPokemonName").html("" + ownImageData);
         $("#DetailPokemonImg").attr("src", "data:image/jpeg;base64," + ownImageData);
     }
     $.mobile.changePage("#pokemanDetail");
