@@ -54,13 +54,35 @@ var api = "http://pokeapi.co/api/v2/";
 var caughtKey = "MyCaughtPokemon";
 var livePokemonKey = "AllLivePokemon";
 var generationDateKey = "LastGeneratedPokemon";
+var ownPokemonKey = "OwnPokemonUrl";
 var pokemonListLimit = 20;
 var totalPokeCount = 0;
 var currentPokeCount = 0;
 var nextPokemanUri = "";
 var runningLoader = "<li class='RunningLoader'> <img src='img/runningLoader.gif'></li>";
 var isLoading = false;
+var ownImage;
 
+var getOwnPokemon = function(){
+    var pokemonUrl = window.localStorage.getItem(ownPokemonKey);
+    if(pokemonUrl != undefined){
+        ownImage = new Image();
+        image.onload(function(){
+            var html = [];
+            html.push(
+                "<li>",
+                "<a id='OwnPokemon'>",
+                "<h2>",
+                "OwnPokemon",
+                "</h2>",
+                "</a>",
+                "</li>"
+            );
+            $("#PokeList").prepend(html.join());
+        });
+        image.src = pokemonUrl;
+    }
+}
 
 var getMorePokeman = function(){
     isLoading = true;
@@ -111,7 +133,13 @@ $("#PokeList").on('click', 'a', function(e){
     e.preventDefault();
     var url = $(this).attr('id');
     clearDetailPage();
-    $.get(url, setDetailPage);
+    if(url != "OwnPokemon"){
+        $.get(url, setDetailPage);
+    }
+    else{
+        $("#DetailPokemonName").html("fjaggot");
+        $("#DetailPokemonImg").attr("src", ownImage);
+    }
     $.mobile.changePage("#pokemanDetail");
 });
 
@@ -180,7 +208,11 @@ $(document).on("scrollstop", function(e){
 $("#pokemanListPage").on('pageinit', function(){
     $("#PokeList").append(runningLoader);
     $("#PokeList").listview("refresh");
-    var testpokeman = getMorePokeman();
+    getMorePokeman();
+});
+
+$("#pokemanListPage").on('pagebeforeshow', function(){
+    getOwnPokemon();
 });
 
 $("#MyPokemanPage").on('pagebeforeshow', function(){
