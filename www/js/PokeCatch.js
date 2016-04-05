@@ -15,7 +15,7 @@ var startGenerateLivePokemon = function(){
         livePokemon = [];
         generateLivePokemon(livePokemonAmount);
     }
-    else if( generateDate == undefined || generateDate != getToday){ 
+    else if( generateDate == undefined || generateDate != getToday()){ 
          generateLivePokemon(livePokemonAmount);
     }
     else if(livePokemon.length < livePokemonAmount){
@@ -24,6 +24,7 @@ var startGenerateLivePokemon = function(){
 }
 
 var generateLivePokemon = function(amount){
+    $("#generationText").html("Generating pokemon");
     for(var i = 0; i < amount - 1; i++){
         var pos = generateLocation();
         var pokemon = new Object();
@@ -42,7 +43,9 @@ var generateLivePokemon = function(amount){
     livePokemon.push(pokemon);
     
     window.localStorage.setItem(livePokemonKey, JSON.stringify(livePokemon));
-    window.localStorage.setItem(generationDateKey, getToday());
+    generateDate = getToday();
+    window.localStorage.setItem(generationDateKey, generateDate);
+    $("#generationText").html("Last generated: " + generateDate);
 }
 
 var generateLocation = function(){
@@ -151,7 +154,7 @@ var catchPokemon = function(pokemon){
 var getToday = function(){
     var today = new Date();
     var date  = today.getDate() + "-";
-    date    += today.getMonth() + "-";
+    date    += (today.getMonth() + 1) + "-";
     date    += today.getFullYear();
     return date;
 }
@@ -164,6 +167,7 @@ $("#CatchButton").click(function(){
         }
     }
 });
+$("#generationText").html("Last generated: " + generateDate);
 startGenerateLivePokemon();
 
 navigator.geolocation.watchPosition(checkForPokemonCatch);
