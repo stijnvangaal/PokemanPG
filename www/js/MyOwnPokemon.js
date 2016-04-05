@@ -4,7 +4,8 @@ var captureImage = function(){
 }
 
 var imageCaptured = function(imageData){
-    ownImageData = ImageData;  
+    ownImageData = new Image();
+    ownImageData.src = "data:image/jpeg;base64," + ImageData;  
     $("#capturePokemonButton").html("Image loaded");
     var html = [];
     html.push(

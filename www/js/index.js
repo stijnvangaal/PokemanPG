@@ -117,7 +117,7 @@ $("#PokeList").on('click', 'a', function(e){
     }
     else{
         $("#DetailPokemonName").html("" + ownImageData);
-        $("#DetailPokemonImg").attr("src", "data:image/jpeg;base64," + ownImageData);
+        $("#DetailPokemonImg").attr("src", ownImageData);
     }
     $.mobile.changePage("#pokemanDetail");
 });
