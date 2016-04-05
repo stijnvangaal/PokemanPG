@@ -1,8 +1,8 @@
 var livePokemon = JSON.parse(window.localStorage.getItem(livePokemonKey));
 var generateDate = window.localStorage.getItem(generationDateKey);
 var livePokemonAmount = 10;
-var pokemonGenerateLng = 5.293565;
-var PokemonGenerateLat = 51.690155;
+var pokemonGenerateLng = 5.2865831;
+var PokemonGenerateLat = 51.6879925;
 var PokemonGenerateRad = 1000;
 var pokeAmount = 721;
 var catchRaduis = 10/111300; //10 meters
