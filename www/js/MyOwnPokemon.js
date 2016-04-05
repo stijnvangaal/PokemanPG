@@ -1,6 +1,6 @@
 var captureImage = function(){
     navigator.camera.getPicture( imageCaptured, cameraError, { quality : 50,
-        destinationType: Camera.DestinationType.FILE_URI     } );
+        destinationType: Camera.DestinationType.DATA_URL } );
 }
 
 var names = [
