@@ -5,7 +5,7 @@ var pokemonGenerateLng = 5.293361;
 var PokemonGenerateLat = 51.690379;
 var PokemonGenerateRad = 1000;
 var pokeAmount = 721;
-var catchRaduis = 10/111300;
+var catchRaduis = 25/111300;
 
 var myLat = 0;
 var myLng = 0;
@@ -165,7 +165,7 @@ $("#GenerateNew").on("tap", function(){
     generateLivePokemon(livePokemonAmount);
 });
 
-$("#CatchButton").click(function(){
+$("#CatchButton").on("tap", function(){
     if($("#CatchButton").attr("src") == "img/catchButtonGreen.png"){
         var pokemonInRange = getPokemonInRange(myLat, myLng);
         if(pokemonInRange != undefined){ 

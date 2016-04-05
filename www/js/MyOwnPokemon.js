@@ -4,10 +4,14 @@ var captureImage = function(){
 }
 
 var names = [
-    "fjaggot",
-    "fjaggiemon",
-    "tyrannosaurus fjag",
-    "pickufjag"
+    "Fjaggot",
+    "Fjaggiemon",
+    "Tyrannosaurus Fjag",
+    "Pickufjag",
+    "Penisaur",
+    "Fjaggatar",
+    "GangaFjag",
+    "Digimon"
 ]
 
 var getName = function(){
@@ -34,6 +38,6 @@ var cameraError = function(err){
     
 }
 
-$("#capturePokemonButton").click(function(){
+$("#capturePokemonButton").on("tap", function(){
    captureImage(); 
 });

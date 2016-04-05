@@ -106,7 +106,7 @@ var getPokemonSprite = function(pokemanUrl, imgElement){
     });
 }
 
-$("#PokeList").on('click', 'a', function(e){
+$("#PokeList").on('tap', 'a', function(e){
     e.preventDefault();
     var url = $(this).attr('id');
     clearDetailPage();
@@ -114,7 +114,7 @@ $("#PokeList").on('click', 'a', function(e){
     $.mobile.changePage("#pokemanDetail");
 });
 
-$("#MyPokeList").on('click', 'a', function(e){
+$("#MyPokeList").on('tap', 'a', function(e){
     e.preventDefault();
     var url = $(this).attr('id');
     clearDetailPage();
