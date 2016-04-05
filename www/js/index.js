@@ -54,14 +54,12 @@ var api = "http://pokeapi.co/api/v2/";
 var caughtKey = "MyCaughtPokemon";
 var livePokemonKey = "AllLivePokemon";
 var generationDateKey = "LastGeneratedPokemon";
-var ownPokemonKey = "OwnPokemonUrl";
 var pokemonListLimit = 20;
 var totalPokeCount = 0;
 var currentPokeCount = 0;
 var nextPokemanUri = "";
 var runningLoader = "<li class='RunningLoader'> <img src='img/runningLoader.gif'></li>";
 var isLoading = false;
-var ownImageData;
 
 var getMorePokeman = function(){
     isLoading = true;
@@ -112,13 +110,7 @@ $("#PokeList").on('click', 'a', function(e){
     e.preventDefault();
     var url = $(this).attr('id');
     clearDetailPage();
-    if(url != "OwnPokemon"){
-        $.get(url, setDetailPage);
-    }
-    else{
-        $("#DetailPokemonName").html("" + ownImageData);
-        $("#DetailPokemonImg").attr("src", ownImageData);
-    }
+    $.get(url, setDetailPage);
     $.mobile.changePage("#pokemanDetail");
 });
 

@@ -1,23 +1,32 @@
 var captureImage = function(){
     navigator.camera.getPicture( imageCaptured, cameraError, { quality : 50,
-        destinationType: Camera.DestinationType.DATA_URL    } );
+        destinationType: Camera.DestinationType.FILE_URI     } );
 }
 
-var imageCaptured = function(imageData){
-    ownImageData = new Image();
-    ownImageData.src = "data:image/jpeg;base64," + ImageData; 
-    $("#capturePokemonImg").attr("src", ownImageData); 
-    var html = [];
-    html.push(
-        "<li>",
-        "<a id='OwnPokemon'>",
-        "<h2>",
-        "Own Pokemon",
-        "</h2>",
-        "</a>",
-        "</li>"
-    );
-    $("#PokeList").prepend(html.join(""));
+var names = [
+    "fjaggot",
+    "fjaggiemon",
+    "tyrannosaurus fjag",
+    "pickfjag"
+]
+
+var getName = function(){
+    return names[Math.floor(Math.random() * names.length)];
+}
+
+var imageCaptured = function(imageUrl){
+    $("#CreateAction").html("Hey! What's this? A new Pokemon!");
+    $("#CreatedPokeName").html("");
+    $("#CreatedPokeImg").attr("src", "img/pokeball-waiting.gif");
+    setTimeout(function() {
+        $("#CreateAction").html("Yes we caught it. What would it be?");
+        $("#CreatedPokeImg").attr("src", "img/pokeball-done.gif");
+        setTimeout(function() {
+            $("#CreateAction").html("It's a");
+            $("#CreatedPokeName").html(getName);
+            $("#CreatedPokeImg").attr("src", "data:image/jpeg;base64," + ImageData); 
+        }, 2000);
+    }, 3000);
 }
 
 var cameraError = function(err){
