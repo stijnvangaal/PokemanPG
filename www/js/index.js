@@ -66,8 +66,10 @@ var ownImage;
 var getOwnPokemon = function(){
     var pokemonUrl = window.localStorage.getItem(ownPokemonKey);
     if(pokemonUrl != undefined){
+        $("#capturePokemonButton").html("Existing " + pokemonUrl);
         ownImage = new Image();
         image.onload(function(){
+            $("#capturePokemonButton").html("Image loaded");
             var html = [];
             html.push(
                 "<li>",
