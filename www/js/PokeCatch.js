@@ -179,10 +179,10 @@ $("#CatchButton").on("tap", function(){
     }
     else{
         var location = livePokemon[0].lat + ',' + livePokemon[0].lng;
-        if(window.device.platform == "IOS"){
+        if(window.device.platform.toUpperCase() === "IOS"){
             window.open("http://maps.apple.com/?q="+location, '_system');
         }
-        else if(window.device.platform == "android"){
+        else if(window.device.platform.toUpperCase() === "ANDROID"){
             window.open("geo:"+location);
         }
         else{
