@@ -182,7 +182,10 @@ $("#CatchButton").on("tap", function(){
         if(window.device.platform.toUpperCase() === "IOS"){
             window.open("http://maps.apple.com/?q="+location, '_system');
         }
-        else if(window.device.platform.toUpperCase() === "ANDROID"){
+        else if(window.device.platform.toUpperCase() === "ANDROID" &&
+            (window.localStorage.getItem(locationInBrowserKey) == undefined ||
+            window.localStorage.getItem(locationInBrowserKey) == 'off')
+        ){
             window.open("geo:"+location);
         }
         else{

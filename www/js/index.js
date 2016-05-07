@@ -55,6 +55,7 @@ var caughtKey = "MyCaughtPokemon";
 var livePokemonKey = "AllLivePokemon";
 var generationDateKey = "LastGeneratedPokemon";
 var generationTimeKey = "DaysBeforeGenerate";
+var locationInBrowserKey = "LocationInBrowser";
 var pokemonListLimit = 20;
 var totalPokeCount = 0;
 var currentPokeCount = 0;
@@ -182,6 +183,11 @@ $("#daySelection").change(function(){
     window.localStorage.setItem(generationTimeKey, selected);
 });
 
+$("#locationSwitch").change(function(){
+    var selected = $(this).val();
+    window.localStorage.setItem(locationInBrowserKey, selected);
+});
+
 $("#pokemanListPage").on('pageinit', function(){
     $("#PokeList").append(runningLoader);
     $("#PokeList").listview("refresh");
@@ -201,7 +207,15 @@ $("#settingsPage").on('pagebeforeshow', function(){
     days--;
     $("#daySelection option:eq("+days+")").attr('selected',true);
     $("#daySelection").selectmenu("refresh", true);
-
+    
+    var inBrowser = window.localStorage.getItem(locationInBrowserKey);
+    if(inBrowser == undefined || inBrowser == 'off'){ 
+        $('#locationSwitch').val('off');
+    }
+    else{
+        $('#locationSwitch').val('on');
+    }
+    $('#locationSwitch').slider('refresh');
 });
 
 $(document).on('swiperight', function(){
