@@ -54,6 +54,7 @@ var api = "http://pokeapi.co/api/v2/";
 var caughtKey = "MyCaughtPokemon";
 var livePokemonKey = "AllLivePokemon";
 var generationDateKey = "LastGeneratedPokemon";
+var generationTimeKey = "DaysBeforeGenerate";
 var pokemonListLimit = 20;
 var totalPokeCount = 0;
 var currentPokeCount = 0;
@@ -176,6 +177,11 @@ $(document).on("scrollstop", function(e){
     }
 });
 
+$("#daySelection").change(function(){
+    var selected = $(this).val();
+    window.localStorage.setItem(generationTimeKey, selected);
+});
+
 $("#pokemanListPage").on('pageinit', function(){
     $("#PokeList").append(runningLoader);
     $("#PokeList").listview("refresh");
@@ -187,4 +193,19 @@ $("#MyPokemanPage").on('pagebeforeshow', function(){
     //$("#MyPokeList").append(runningLoader);
     $("#MyPokeList").listview("refresh");
     getMyPokeman();
+});
+
+$("#settingsPage").on('pagebeforeshow', function(){
+    var days = window.localStorage.getItem(generationTimeKey);
+    if(days == undefined){ days = 1; }
+    days--;
+    $("#daySelection option:eq("+days+")").attr('selected',true);
+    $("#daySelection").selectmenu("refresh", true);
+
+});
+
+$(document).on('swiperight', function(){
+    if($.mobile.activePage.attr('id') != "Menu"){
+        window.history.back();
+    }
 });

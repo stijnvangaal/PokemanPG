@@ -1,5 +1,6 @@
 var livePokemon = JSON.parse(window.localStorage.getItem(livePokemonKey));
 var generateDate = window.localStorage.getItem(generationDateKey);
+var generateTime = window.localStorage.getItem(generationTimeKey);
 var livePokemonAmount = 10;
 var pokemonGenerateLng = 5.293361;
 var PokemonGenerateLat = 51.690379;
@@ -11,11 +12,15 @@ var myLat = 0;
 var myLng = 0;
 
 var startGenerateLivePokemon = function(){
+    var date = new Date(generateDate);
+    var newDate = new Date();
+    if(generateTime == undefined || generateTime < 1){ generateTime = 1; }
+    newDate.setDate(newDate.getDate()- (generateTime -1));
     if(livePokemon == undefined){
         livePokemon = [];
         generateLivePokemon(livePokemonAmount);
     }
-    else if( generateDate == undefined || generateDate != getToday()){ 
+    else if( generateDate == undefined || date < newDate){ 
         livePokemon = [];
         generateLivePokemon(livePokemonAmount);
     }
@@ -87,10 +92,10 @@ var checkForPokemonCatch = function(position){
     var pokemonInRange = getPokemonInRange(position.coords.latitude, position.coords.longitude);
     
     if(pokemonInRange != undefined){
-        $("#CatchButton").attr("src", "img/catchButtonGreen.png");
+        $("#CatchButton").attr("class", "buttonCatch");
     }
     else{
-        $("#CatchButton").attr("src", "img/catchButtonGrey.png");
+        $("#CatchButton").attr("class", "buttonStill");
     }
 }
 
@@ -154,9 +159,9 @@ var catchPokemon = function(pokemon){
 
 var getToday = function(){
     var today = new Date();
-    var date  = today.getDate() + "-";
-    date    += (today.getMonth() + 1) + "-";
-    date    += today.getFullYear();
+    var date = (today.getMonth() + 1) + "-";
+    date += today.getDate() + "-";
+    date += today.getFullYear();
     return date;
 }
 
@@ -166,10 +171,22 @@ $("#GenerateNew").on("tap", function(){
 });
 
 $("#CatchButton").on("tap", function(){
-    if($("#CatchButton").attr("src") == "img/catchButtonGreen.png"){
+    if($("#CatchButton").attr("class") == "buttonCatch"){
         var pokemonInRange = getPokemonInRange(myLat, myLng);
         if(pokemonInRange != undefined){ 
             catchPokemon(pokemonInRange);
+        }
+    }
+    else{
+        var location = livePokemon[0].lat + ',' + livePokemon[0].lng;
+        if(window.device.platform == "IOS"){
+            window.open("http://maps.apple.com/?q="+location, '_system');
+        }
+        else if(window.device.platform == "android"){
+            window.open("geo:"+location);
+        }
+        else{
+            window.open("http://maps.google.com/?q="+location, '_system');
         }
     }
 });

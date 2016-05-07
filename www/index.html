@@ -41,10 +41,11 @@
                 <ul data-role="listview">
                     <li><a href="#pokemanListPage">PokemanList</a></li>
                     <li><a href="#MyPokemanPage">My Pokeman</a></li>
+                    <li><a href="#settingsPage">Settings</a></li>
                 </ul>
                 <p id="generationText"></p>
                 <p id="GenerateNew" style="width:100%;"><a data-role="button">Generate New Pokemon</a></p>
-                <img data-role="button" id="CatchButton" src="img/catchButtonGrey.png" style="margin:10px 100px; width: 300px; height: 300px">
+                <div data-role="button" id="CatchButton" class="buttonStill" style="margin:10px 100px; width: 300px; height: 300px"></div>
                 <p style="margin: 0 150px">Lat</p>
                 <p id="latSpan" style="margin: 0 150px"/>
                 <p style="margin: 0 150px">lng</p>
@@ -108,6 +109,25 @@
             </div>
         </div>
         
+        <div data-role="page" id="settingsPage">
+            <div data-role="header">
+                <h1>Pokeman!</h1>
+            </div>
+            <div role="main">
+                <label for="select-native-1">Pokeman Generate time</label>
+                <select id="daySelection">
+                    <option value="1" id="selectDays1">One day</option>
+                    <option value="2" id="selectDays2">Two days</option>
+                    <option value="3" id="selectDays3">Three days</option>
+                    <option value="4" id="selectDays4">Four days</option>
+                    <option value="5" id="selectDays5">Five days</option>
+                </select>
+            </div>
+            <div data-role="footer">
+                <p style="width:100%;"><a href="#" onclick="window.open('http://www.pokeapi.co', '_system')" data-role="button">Check out the pokeApi</a></p>
+            </div>
+        </div>
+                
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/PokeCatch.js"></script>

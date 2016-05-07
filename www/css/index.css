@@ -113,3 +113,12 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+.buttonStill{
+    background-image:url(../img/catchSprite.png);
+}
+
+.buttonCatch{
+    background-image:url(../img/catchSprite.png);
+    background-position-x: 300px;
+}
