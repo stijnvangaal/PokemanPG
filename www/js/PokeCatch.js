@@ -174,9 +174,7 @@ $("#GenerateNew").on("tap", function(){
 });
 
 $("#CatchButton").on("tap", function(){
-    $("#generationText").html("goIN " + catchable);
     if(catchable){
-        $("#generationText").html("try");
         var pokemonInRange = getPokemonInRange(myLat, myLng);
         if(pokemonInRange != undefined){ 
             catchPokemon(pokemonInRange);
@@ -184,21 +182,16 @@ $("#CatchButton").on("tap", function(){
     }
     else{
         var location = livePokemon[0].lat + ',' + livePokemon[0].lng;
-        $("#generationText").html(window.device.model);
-        $("#generationText").html("test");
         if(window.device.model.toUpperCase() === "IOS"){
-            $("#generationText").html("tapped");
             window.open("http://maps.apple.com/?q="+location, '_system');
         }
         else if(window.device.model.toUpperCase() === "ANDROID" &&
             (window.localStorage.getItem(locationInBrowserKey) == undefined ||
             window.localStorage.getItem(locationInBrowserKey) == 'off')
         ){
-            $("#generationText").html("geo");
             window.open("geo:"+location, '_system');
         }
         else{
-            $("#generationText").html("browser");
             window.open("http://maps.google.com/?q="+location, '_system');
         }
     }
