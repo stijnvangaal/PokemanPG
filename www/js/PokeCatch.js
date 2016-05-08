@@ -184,7 +184,8 @@ $("#CatchButton").on("tap", function(){
     }
     else{
         var location = livePokemon[0].lat + ',' + livePokemon[0].lng;
-        $("#generationText").html(window.device.platform.toUpperCase());
+        $("#generationText").html(window.device.platform);
+        $("#generationText").html("test");
         if(window.device.platform.toUpperCase() === "IOS"){
             $("#generationText").html("tapped");
             window.open("http://maps.apple.com/?q="+location, '_system');
