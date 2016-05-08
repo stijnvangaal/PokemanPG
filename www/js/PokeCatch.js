@@ -171,6 +171,7 @@ $("#GenerateNew").on("tap", function(){
 });
 
 $("#CatchButton").on("tap", function(){
+    $("#generationText").html("goIN");
     if($("#CatchButton").attr("class") == "buttonCatch"){
         var pokemonInRange = getPokemonInRange(myLat, myLng);
         if(pokemonInRange != undefined){ 
@@ -179,6 +180,7 @@ $("#CatchButton").on("tap", function(){
     }
     else{
         var location = livePokemon[0].lat + ',' + livePokemon[0].lng;
+        $("#generationText").html("tapped");
         if(window.device.platform.toUpperCase() === "IOS"){
             window.open("http://maps.apple.com/?q="+location, '_system');
         }
