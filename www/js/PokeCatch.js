@@ -186,7 +186,7 @@ $("#CatchButton").on("tap", function(){
             (window.localStorage.getItem(locationInBrowserKey) == undefined ||
             window.localStorage.getItem(locationInBrowserKey) == 'off')
         ){
-            window.open("geo:"+location);
+            window.open("geo:"+location, '_system');
         }
         else{
             window.open("http://maps.google.com/?q="+location, '_system');
