@@ -7,6 +7,7 @@ var PokemonGenerateLat = 51.690379;
 var PokemonGenerateRad = 1000;
 var pokeAmount = 721;
 var catchRaduis = 300/111300;
+var catchable = false;
 
 var myLat = 0;
 var myLng = 0;
@@ -93,9 +94,11 @@ var checkForPokemonCatch = function(position){
     
     if(pokemonInRange != undefined){
         $("#CatchButton").attr("class", "buttonCatch");
+        catchable = true;
     }
     else{
         $("#CatchButton").attr("class", "buttonStill");
+        catchable = false;
     }
 }
 
@@ -172,7 +175,7 @@ $("#GenerateNew").on("tap", function(){
 
 $("#CatchButton").on("tap", function(){
     //$("#generationText").html("goIN");
-    if($("#CatchButton").attr("class") == "buttonCatch"){
+    if(catchable){
         var pokemonInRange = getPokemonInRange(myLat, myLng);
         if(pokemonInRange != undefined){ 
             catchPokemon(pokemonInRange);
