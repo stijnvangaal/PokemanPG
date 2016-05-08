@@ -174,8 +174,9 @@ $("#GenerateNew").on("tap", function(){
 });
 
 $("#CatchButton").on("tap", function(){
-    //$("#generationText").html("goIN");
+    $("#generationText").html("goIN " + catchable);
     if(catchable){
+        $("#generationText").html("try");
         var pokemonInRange = getPokemonInRange(myLat, myLng);
         if(pokemonInRange != undefined){ 
             catchPokemon(pokemonInRange);
