@@ -186,9 +186,11 @@ $("#CatchButton").on("tap", function(){
             (window.localStorage.getItem(locationInBrowserKey) == undefined ||
             window.localStorage.getItem(locationInBrowserKey) == 'off')
         ){
+            $("#generationText").html("geo");
             window.open("geo:"+location, '_system');
         }
         else{
+            $("#generationText").html("browser");
             window.open("http://maps.google.com/?q="+location, '_system');
         }
     }
