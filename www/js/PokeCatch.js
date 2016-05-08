@@ -184,13 +184,13 @@ $("#CatchButton").on("tap", function(){
     }
     else{
         var location = livePokemon[0].lat + ',' + livePokemon[0].lng;
-        $("#generationText").html(window.device.platform);
+        $("#generationText").html(window.device.model);
         $("#generationText").html("test");
-        if(window.device.platform.toUpperCase() === "IOS"){
+        if(window.device.model.toUpperCase() === "IOS"){
             $("#generationText").html("tapped");
             window.open("http://maps.apple.com/?q="+location, '_system');
         }
-        else if(window.device.platform.toUpperCase() === "ANDROID" &&
+        else if(window.device.model.toUpperCase() === "ANDROID" &&
             (window.localStorage.getItem(locationInBrowserKey) == undefined ||
             window.localStorage.getItem(locationInBrowserKey) == 'off')
         ){
