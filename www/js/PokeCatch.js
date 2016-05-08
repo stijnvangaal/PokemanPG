@@ -180,8 +180,9 @@ $("#CatchButton").on("tap", function(){
     }
     else{
         var location = livePokemon[0].lat + ',' + livePokemon[0].lng;
-        $("#generationText").html("tapped");
+        $("#generationText").html(window.device.platform.toUpperCase());
         if(window.device.platform.toUpperCase() === "IOS"){
+            $("#generationText").html("tapped");
             window.open("http://maps.apple.com/?q="+location, '_system');
         }
         else if(window.device.platform.toUpperCase() === "ANDROID" &&
